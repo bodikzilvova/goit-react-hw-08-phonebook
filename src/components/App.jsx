@@ -8,7 +8,7 @@ import { fetchContacts } from 'redux/operations';
 import { Route, Routes } from 'react-router-dom';
 import Homepage from '../pages/HomePage/HomePage'
 import RegistreationPage from '../pages/RegistretionPage'
-import LoginPage from '../pages/LoginPage'
+import LoginPage from '../pages/LoginPage/LoginPage'
 import Layout from './Layout/Layout';
 
 export const App = () => {
