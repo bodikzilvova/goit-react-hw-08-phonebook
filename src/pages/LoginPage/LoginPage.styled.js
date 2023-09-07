@@ -110,7 +110,7 @@ transition:.5s;
 
 export const Noreg = styled.span`
 text-transform:uppercase;
-color:#858585;
+color: Navy;
 font-weight:lighter;
 -webkit-transition:.5s;
 transition:.5s;

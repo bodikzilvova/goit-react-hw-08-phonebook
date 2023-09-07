@@ -90,10 +90,25 @@ export const PasswordInput = styled.input`
   transition: 0.5s;
 `;
 
-export const Noreg = styled.span`
-  text-transform: uppercase;
-  color: #858585;
-  font-weight: lighter;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
+
+
+export const Btn = styled.button`
+width: 200px;
+    height: 50px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.87;
+    letter-spacing: 0.06em;
+    color: white;
+    background: #188CE8;
+    border: none;
+    border-radius: 4px;
+    border-color: white;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+    justify-content: center;
+    align-items: center;
 `;

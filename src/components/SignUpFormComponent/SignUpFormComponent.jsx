@@ -1,19 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Button from '@mui/material/Button';
+
 import {
   EmailInput,
-  Noreg,
   PasswordInput,
   SignUpForm,
   UserNameInput,
+  Noreg,
+  Btn,
 } from './SignUpFormComponent.styled';
 import { signUp } from 'redux/auth.service';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function SignUpFormComponent() {
+  const navigate = useNavigate()
   const handleSubmit = e => {
     e.preventDefault();
-    console.log('Form submitted');
 
     const newUser = {
       name: e.target.elements.name.value,
@@ -22,6 +23,9 @@ export default function SignUpFormComponent() {
     };
     console.log(newUser);
     signUp(newUser)
+      .then(res => {console.log('Success')
+      navigate('/login')})
+      .catch(error => console.log('error'));
   };
 
   return (
@@ -29,14 +33,10 @@ export default function SignUpFormComponent() {
       <UserNameInput type="text" name="name" placeholder="name" />
       <EmailInput type="email" name="email" placeholder="email" />
       <PasswordInput type="password" name="password" placeholder="password" />
-
       <Link to="/login" style={{ textDecoration: 'none' }}>
         <Noreg>Already registered?</Noreg>
       </Link>
-
-      <Button type="submit" variant="contained" href="#contained-buttons">
-        Sign up
-      </Button>
+      <Btn type="submit">Sign up</Btn>
     </SignUpForm>
   );
 }
