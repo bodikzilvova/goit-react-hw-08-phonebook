@@ -13,7 +13,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export default function LoginFormComponent() {
   const isAuth = useSelector((state) => state.auth.token);
-  console.log(isAuth)
 
   const navigate = useNavigate();
 

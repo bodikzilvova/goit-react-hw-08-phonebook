@@ -1,39 +1,49 @@
-import { loginThunk } from "./auth-thunk";
-
-const { createSlice } = require("@reduxjs/toolkit");
+import { getProfileThunk, loginThunk } from './auth-thunk';
+const { createSlice, isAnyOf } = require('@reduxjs/toolkit');
 
 const initialState = {
-    token: '',
-    isLoading: false,
-    error: '',
-}
+  token: '',
+  isLoading: false,
+  error: '',
+  profile: null,
+};
 
-const handlePending = (state, {payload}) => { 
-    state.isLoading = true;
+const handlePending = state => {
+  state.isLoading = true;
+};
 
- }
+const handleFulfilled = (state, { payload }) => {
+  state.isLoading = false;
+  state.error = '';
+  state.token = payload.token;
+};
 
-const handleFulfilled = (state, {payload}) => {
-    state.isLoading = false;
-    state.error = '';
-    state.token = payload
-  }
+const handleRejected = (state, { payload }) => {
+  state.isLoading = false;
+  state.error = payload;
+};
 
-const handleRejected = (state, {payload}) => { 
-    state.isLoading = false;
-    state.error = '';
-
- }
+const handleFulfilledProfile = (state, { payload }) => {
+  state.isLoading = false;
+  state.error = '';
+  state.profile = payload;
+};
 
 const authSlice = createSlice({
-    name: 'auth',
-    initialState,
-    reducers:{},
-    extraReducers: (builder) => {
-        builder.addCase(loginThunk.pending, handlePending)
-        .addCase(loginThunk.fulfilled, handleFulfilled)
-        .addCase(loginThunk.rejected, handleRejected)
-    },
-})
+  name: 'auth',
+  initialState,
 
-export const authReducer = authSlice.reducer
+  extraReducers: builder => {
+    builder
+      .addCase(loginThunk.fulfilled, handleFulfilled)
+      .addCase(getProfileThunk.fulfilled, handleFulfilledProfile)
+      .addMatcher(
+        isAnyOf(loginThunk.pending, getProfileThunk.pending, handlePending)
+      )
+      .addMatcher(
+        isAnyOf(loginThunk.rejected, getProfileThunk.rejected, handleRejected)
+      );
+  },
+});
+
+export const authReducer = authSlice.reducer;
