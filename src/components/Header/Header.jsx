@@ -7,20 +7,26 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { delToken } from 'redux/auth.service';
-import { logOutThunk } from 'redux/auth-thunk';
+
+import { getProfileThunk, logOutThunk } from 'redux/auth-thunk';
+import { useEffect } from 'react';
+import { UserName } from './Header.styled';
 
 export default function Header() {
-  const {profile} = useSelector(state => state.auth)
+  const { profile, token } = useSelector(state => state.auth);
+  console.log(profile)
+  console.log(token)
   const dispatch = useDispatch();
 
-  const handleLogin = () =>{
-
-  }
+  const handleLogin = () => {};
 
   const handleLogOut = () => {
-  dispatch(logOutThunk())
-  }
+    dispatch(logOutThunk());
+  };
+
+  useEffect(() => {
+    token && dispatch(getProfileThunk())
+  }, [token, dispatch]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -37,16 +43,21 @@ export default function Header() {
             Phonebook
           </Typography>
 
-{profile && <div>{profile.name}</div>}
+          {profile && <UserName>{profile.name}</UserName>}
 
-          <Link to="/" style={{ color : 'white'}}>
+          <Link to="/" style={{ color: 'white' }}>
             <Button color="inherit">Home</Button>
           </Link>
-          <Link to="/registretion" style={{ color : 'white'}}>
+          <Link to="/registretion" style={{ color: 'white' }}>
             <Button color="inherit">Sign Up</Button>
           </Link>
-          <Link to="/login" style={{ color : 'white'}}>
-            <Button onClick={profile? handleLogOut : handleLogin} color="inherit">{profile? 'LogOut' : 'Login'}</Button>
+          <Link to="/login" style={{ color: 'white' }}>
+            <Button
+              onClick={profile ? handleLogOut : handleLogin}
+              color="inherit"
+            >
+              {profile ? 'LogOut' : 'Login'}
+            </Button>
           </Link>
         </Toolbar>
       </AppBar>

@@ -18,7 +18,7 @@ const handleFulfilled = (state, { payload }) => {
   state.token = payload.token;
 };
 
-const handleRejected = (state, { payload }) => {
+const handleRejected = (state, {payload}) => {
   state.isLoading = false;
   state.error = payload;
 };
@@ -38,10 +38,12 @@ const authSlice = createSlice({
       .addCase(loginThunk.fulfilled, handleFulfilled)
       .addCase(getProfileThunk.fulfilled, handleFulfilledProfile)
       .addMatcher(
-        isAnyOf(loginThunk.pending, getProfileThunk.pending, handlePending)
+        isAnyOf(loginThunk.pending, getProfileThunk.pending),
+        handlePending
       )
       .addMatcher(
-        isAnyOf(loginThunk.rejected, getProfileThunk.rejected, handleRejected)
+        isAnyOf(loginThunk.rejected, getProfileThunk.rejected),
+        handleRejected
       );
   },
 });

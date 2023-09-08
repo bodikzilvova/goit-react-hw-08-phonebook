@@ -17,7 +17,7 @@ export default function LoginFormComponent() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    isAuth && navigate('/');
+    isAuth && navigate('/phonebook');
   }, [isAuth]);
 
   const dispatch = useDispatch();
