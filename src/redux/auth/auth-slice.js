@@ -16,6 +16,7 @@ const handleFulfilled = (state, { payload }) => {
   state.isLoading = false;
   state.error = '';
   state.token = payload.token;
+  state.profile = payload;
 };
 
 const handleRejected = (state, { payload }) => {

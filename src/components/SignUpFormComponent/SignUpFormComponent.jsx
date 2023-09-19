@@ -9,10 +9,10 @@ import {
   Noreg,
   Btn,
 } from './SignUpFormComponent.styled';
-import { signUp } from 'redux/auth.service';
+import { signUp } from 'redux/auth/auth.service';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { loginThunk } from 'redux/auth-thunk';
+import { loginThunk } from 'redux/auth/auth-thunk';
 
 export default function SignUpFormComponent() {
   const dispatch = useDispatch();

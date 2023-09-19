@@ -9,7 +9,7 @@ import {
   Btn,
 } from './LoginFormComponent.styled';
 
-import { getProfileThunk, loginThunk } from 'redux/auth-thunk';
+import { loginThunk } from 'redux/auth/auth-thunk';
 import { useDispatch } from 'react-redux';
 
 export default function LoginFormComponent() {
@@ -26,7 +26,6 @@ export default function LoginFormComponent() {
     )
       .unwrap()
       .then(() => {
-        dispatch(getProfileThunk());
         navigate('/phonebook');
       })
       .catch(() => Notiflix.Notify.failure('Wrong password or mail'));

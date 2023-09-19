@@ -8,8 +8,9 @@ import {
 } from './ContactForm.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
-import { getContacts } from 'redux/contactsSlice';
-import { addContact } from 'redux/contacts-thunk';
+import { getContacts } from 'redux/contacts/contactsSlice';
+import { addContact } from 'redux/contacts/contacts-thunk';
+import Notiflix from 'notiflix';
 
 export const ContactForm = () => {
   const contacts = useSelector(getContacts);
@@ -35,7 +36,7 @@ export const ContactForm = () => {
     );
 
     if (existingContact) {
-      alert(`${name} is already in contacts`);
+      Notiflix.Notify.warning(`${name} is already in contacts`);
     } else {
       const newContact = {
         id: nanoid(),

@@ -7,16 +7,12 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logOutThunk } from 'redux/auth-thunk';
+import { logOutThunk } from 'redux/auth/auth-thunk';
 import { UserName } from './Header.styled';
 
 export default function Header() {
-  const { profile, token } = useSelector(state => state.auth);
-
-  console.log(profile);
-  console.log(token);
+  const { profile } = useSelector(state => state.auth);
   const dispatch = useDispatch();
-
   const handleLogin = () => {};
 
   const handleLogOut = () => {
@@ -38,7 +34,7 @@ export default function Header() {
             Phonebook
           </Typography>
 
-          {profile && <UserName>{profile.name}</UserName>}
+          {profile && <UserName>{profile.user.name}</UserName>}
 
           <Link to="/" style={{ color: 'white' }}>
             <Button color="inherit">Home</Button>
