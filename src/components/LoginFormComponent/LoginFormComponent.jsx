@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import Notiflix from 'notiflix';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   LoginForm,
@@ -8,19 +9,13 @@ import {
   Btn,
 } from './LoginFormComponent.styled';
 
-import { loginThunk } from 'redux/auth-thunk';
-import { useDispatch, useSelector } from 'react-redux';
+import { getProfileThunk, loginThunk } from 'redux/auth-thunk';
+import { useDispatch } from 'react-redux';
 
 export default function LoginFormComponent() {
-  const isAuth = useSelector((state) => state.auth.token);
-
   const navigate = useNavigate();
-
-  useEffect(() => {
-    isAuth && navigate('/phonebook');
-  }, [isAuth]);
-
   const dispatch = useDispatch();
+
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(
@@ -28,14 +23,22 @@ export default function LoginFormComponent() {
         email: e.target.elements.email.value,
         password: e.target.elements.password.value,
       })
-    );
+    )
+      .unwrap()
+      .then(() => {
+        dispatch(getProfileThunk());
+        navigate('/phonebook');
+      })
+      .catch(() => Notiflix.Notify.failure('Wrong password or mail'));
   };
 
   return (
     <LoginForm onSubmit={handleSubmit}>
       <EmailInput type="email" name="email" placeholder="email" />
       <PasswordInput type="password" name="password" placeholder="password" />
-
+      <Link to="/registretion" style={{ textDecoration: 'none' }}>
+        <Noreg>Not registered yet?</Noreg>
+      </Link>
       <Btn type="submit">Login</Btn>
     </LoginForm>
   );

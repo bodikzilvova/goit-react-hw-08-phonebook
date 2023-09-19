@@ -15,4 +15,3 @@ export const RegistretionPageTitle = styled.h1`
 
   color: Navy;
 `;
-

@@ -1,17 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getProfile, logOut, login } from './auth.service';
 
-
-
-export const loginThunk = createAsyncThunk('users/login', async body => {
-  try {
-    const data = await login(body);
-    return data;
-  } catch (error) {
-    console.log(error);
-    throw error;
+export const loginThunk = createAsyncThunk(
+  'users/login',
+  async (body, { dispatch }) => {
+    try {
+      const data = await login(body);
+      dispatch(getProfileThunk());
+      return data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
-});
+);
 
 export const logOutThunk = createAsyncThunk('users/logout', async body => {
   try {

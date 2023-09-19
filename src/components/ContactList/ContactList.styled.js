@@ -4,8 +4,7 @@ export const ContactListUl = styled.ul`
   margin-top: 15px;
   padding: 0px;
   width: 400px;
- 
-`
+`;
 export const ContactListItem = styled.li`
   margin-bottom: 10px;
   display: flex;
@@ -22,5 +21,4 @@ export const ButtonDelete = styled.button`
   border: 1px solid coral;
   border-radius: 3px;
   cursor: pointer;
-
 `;

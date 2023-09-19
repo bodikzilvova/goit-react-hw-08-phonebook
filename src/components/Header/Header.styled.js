@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 
-
 export const UserName = styled.span`
 font-family: "Roboto","Helvetica","Arial",sans-serif;
     font-weight: 500;

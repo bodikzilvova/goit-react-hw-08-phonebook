@@ -9,7 +9,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from '@reduxjs/toolkit';
 import { getContacts } from 'redux/contactsSlice';
-import { addContact } from 'redux/operations';
+import { addContact } from 'redux/contacts-thunk';
 
 export const ContactForm = () => {
   const contacts = useSelector(getContacts);

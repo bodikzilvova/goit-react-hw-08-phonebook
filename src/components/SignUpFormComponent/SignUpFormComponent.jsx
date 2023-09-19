@@ -1,4 +1,5 @@
 import React from 'react';
+import Notiflix from 'notiflix';
 
 import {
   EmailInput,
@@ -9,23 +10,33 @@ import {
   Btn,
 } from './SignUpFormComponent.styled';
 import { signUp } from 'redux/auth.service';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginThunk } from 'redux/auth-thunk';
 
 export default function SignUpFormComponent() {
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
   const handleSubmit = e => {
     e.preventDefault();
-
+    const userName = e.target.elements.name.value;
+    const userMail = e.target.elements.email.value;
+    const userPassword = e.target.elements.password.value;
     const newUser = {
-      name: e.target.elements.name.value,
-      email: e.target.elements.email.value,
-      password: e.target.elements.password.value,
+      name: userName,
+      email: userMail,
+      password: userPassword,
     };
-    console.log(newUser);
     signUp(newUser)
-      .then(res => {console.log('Success')
-      navigate('/login')})
-      .catch(error => console.log('error'));
+      .then(() => {
+        Notiflix.Notify.success('User created!');
+        dispatch(
+          loginThunk({
+            email: userMail,
+            password: userPassword,
+          })
+        );
+      })
+      .catch(() => Notiflix.Notify.failure('Try another password or mail'));
   };
 
   return (
