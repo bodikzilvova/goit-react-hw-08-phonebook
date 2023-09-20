@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 export default function HomePage() {
-  const { profile } = useSelector(state => state.auth);
+  const { isLoggedIn } = useSelector(state => state.auth);
   return (
     <ContainerPage>
       <HomePageTitle>Phonebook</HomePageTitle>
@@ -14,7 +14,7 @@ export default function HomePage() {
         This is the place to keep all your contacts.
       </Greetings>
 
-      {!profile && (
+      {!isLoggedIn && (
         <div style={{ marginTop: '100px' }}>
           <Link to="/login" style={{ color: 'white' }}>
             <Button variant="contained">Try it now!</Button>

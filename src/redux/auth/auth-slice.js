@@ -17,23 +17,20 @@ const handleFulfilled = (state, { payload }) => {
   state.isLoading = false;
   state.error = '';
   state.token = payload.token;
-  state.user = payload.user;
+  state.user = payload;
   state.isLoggedIn = true;
-  console.log(payload)
 };
 
 const handleRejected = (state, { payload }) => {
   state.isLoading = false;
   state.error = payload;
-  console.log(payload)
 };
 
 const handleFulfilledProfile = (state, { payload }) => {
   state.isLoading = false;
   state.error = '';
-  state.user = payload.user;
+  state.user = payload;
   state.isLoggedIn = true;
-  console.log(payload)
 };
 const handleFulfilledLogOut = (state, { payload }) => {
   state.isLoading = false;

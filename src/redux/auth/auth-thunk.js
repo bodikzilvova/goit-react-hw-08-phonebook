@@ -16,10 +16,10 @@ export const signUpThunk = createAsyncThunk(
   'users/signUp',
   async (credentials, thunkAPI) => {
     try {
-      const response = await axios.post('/users/signup', credentials);
+      const { data } = await axios.post('/users/signup', credentials);
       setToken();
       Notiflix.Notify.success('Welcome to phonebook!');
-      return response.data;
+      return data;
     } catch (e) {
       Notiflix.Notify.failure(`${e.message}`);
       return thunkAPI.rejectWithValue(e.message);
@@ -31,10 +31,10 @@ export const loginThunk = createAsyncThunk(
   'users/login',
   async (credentials, thunkAPI) => {
     try {
-      const response = await axios.post('/users/login', credentials);
+      const { data } = await axios.post('/users/login', credentials);
       setToken();
       Notiflix.Notify.success('Welcome to phonebook!');
-      return response.data;
+      return data;
     } catch (e) {
       Notiflix.Notify.failure('Wrong password or email!');
       return thunkAPI.rejectWithValue(e.message);
@@ -46,9 +46,9 @@ export const logOutThunk = createAsyncThunk(
   'users/logOut',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.post('/users/logout');
+      const { data } = await axios.post('/users/logout');
       delToken();
-      return response.data;
+      return data;
     } catch (e) {
       Notiflix.Notify.failure(`${e.message}`);
       return thunkAPI.rejectWithValue(e.message);
@@ -67,7 +67,7 @@ export const getProfileThunk = createAsyncThunk(
     }
     try {
       setToken(persistedToken);
-      const data = await axios.get('/users/current');
+      const { data } = await axios.get('/users/current');
       return data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

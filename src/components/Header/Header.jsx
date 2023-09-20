@@ -9,11 +9,11 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOutThunk } from 'redux/auth/auth-thunk';
 import { UserName } from './Header.styled';
+import { selectIsLoggedIn, selectUser } from 'redux/auth/selectors';
 
 export default function Header() {
-  const { user, isLoggedIn } = useSelector(state => state.auth);
-  console.log(user.name)
-  console.log(user)
+  const user = useSelector(selectUser);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
   const handleLogin = () => {
   };
