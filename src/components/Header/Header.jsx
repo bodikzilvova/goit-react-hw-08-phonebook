@@ -13,6 +13,7 @@ import { UserName } from './Header.styled';
 export default function Header() {
   const { user, isLoggedIn } = useSelector(state => state.auth);
   console.log(user.name)
+  console.log(user)
   const dispatch = useDispatch();
   const handleLogin = () => {
   };
