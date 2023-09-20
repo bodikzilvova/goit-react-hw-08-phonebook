@@ -18,7 +18,6 @@ export const signUpThunk = createAsyncThunk(
     try {
       const response = await axios.post('/users/signup', credentials);
       setToken();
-     
       Notiflix.Notify.success('Welcome to phonebook!');
       return response.data;
     } catch (e) {
@@ -34,7 +33,6 @@ export const loginThunk = createAsyncThunk(
     try {
       const response = await axios.post('/users/login', credentials);
       setToken();
-      getProfileThunk()
       Notiflix.Notify.success('Welcome to phonebook!');
       return response.data;
     } catch (e) {

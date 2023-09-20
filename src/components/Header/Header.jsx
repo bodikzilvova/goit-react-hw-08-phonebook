@@ -7,15 +7,14 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logOutThunk, loginThunk } from 'redux/auth/auth-thunk';
+import { logOutThunk } from 'redux/auth/auth-thunk';
 import { UserName } from './Header.styled';
 
 export default function Header() {
   const { user, isLoggedIn } = useSelector(state => state.auth);
-  console.log(user)
+  console.log(user.name)
   const dispatch = useDispatch();
   const handleLogin = () => {
-    dispatch(loginThunk())
   };
 
   const handleLogOut = () => {

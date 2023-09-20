@@ -1,5 +1,4 @@
 import React from 'react';
-import Notiflix from 'notiflix';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   LoginForm,
@@ -28,7 +27,7 @@ export default function LoginFormComponent() {
       .then(() => {
         navigate('/phonebook');
       })
-      .catch(() => Notiflix.Notify.failure('Wrong password or mail'));
+      .catch(() =>{});
   };
 
   return (
