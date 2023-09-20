@@ -7,15 +7,15 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProfileThunk, logOutThunk } from 'redux/auth/auth-thunk';
+import { logOutThunk, loginThunk } from 'redux/auth/auth-thunk';
 import { UserName } from './Header.styled';
 
 export default function Header() {
-  const { profile } = useSelector(state => state.auth);
-  console.log(profile)
+  const { user, isLoggedIn } = useSelector(state => state.auth);
+  console.log(user)
   const dispatch = useDispatch();
   const handleLogin = () => {
-    dispatch(getProfileThunk())
+    dispatch(loginThunk())
   };
 
   const handleLogOut = () => {
@@ -37,13 +37,13 @@ export default function Header() {
             Phonebook
           </Typography>
 
-          {profile && <UserName>{profile.user.name}</UserName>}
+          {isLoggedIn && <UserName>{user.name}</UserName>}
          
 
           <Link to="/" style={{ color: 'white' }}>
             <Button color="inherit">Home</Button>
           </Link>
-          {!profile && (
+          {!isLoggedIn && (
             <Link to="/registretion" style={{ color: 'white' }}>
               <Button color="inherit">Sign Up</Button>
             </Link>
@@ -51,10 +51,10 @@ export default function Header() {
 
           <Link to="/login" style={{ color: 'white' }}>
             <Button
-              onClick={profile ? handleLogOut : handleLogin}
+              onClick={isLoggedIn ? handleLogOut : handleLogin}
               color="inherit"
             >
-              {profile ? 'LogOut' : 'Login'}
+              {isLoggedIn ? 'LogOut' : 'Login'}
             </Button>
           </Link>
           <Link to="/phonebook" style={{ color: 'white' }}>

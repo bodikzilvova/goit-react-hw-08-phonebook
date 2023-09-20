@@ -5,7 +5,8 @@ const initialState = {
   token: '',
   isLoading: false,
   error: '',
-  profile: null,
+  user: { name: null, email: null },
+  isLoggedIn: false,
 };
 
 const handlePending = state => {
@@ -16,7 +17,8 @@ const handleFulfilled = (state, { payload }) => {
   state.isLoading = false;
   state.error = '';
   state.token = payload.token;
-  state.profile = payload;
+  state.user = payload.data;
+  state.isLoggedIn = true;
 };
 
 const handleRejected = (state, { payload }) => {
@@ -27,13 +29,15 @@ const handleRejected = (state, { payload }) => {
 const handleFulfilledProfile = (state, { payload }) => {
   state.isLoading = false;
   state.error = '';
-  state.profile = payload;
+  state.user = payload.data;
+  state.isLoggedIn = true;
 };
 const handleFulfilledLogOut = (state, { payload }) => {
   state.isLoading = false;
   state.error = '';
-  state.profile = '';
+  state.user = { name: null, email: null };
   state.token = '';
+  state.isLoggedIn = false;
 };
 
 const authSlice = createSlice({
