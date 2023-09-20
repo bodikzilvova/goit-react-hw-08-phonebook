@@ -9,10 +9,9 @@ import {
   Noreg,
   Btn,
 } from './SignUpFormComponent.styled';
-import { signUp } from 'redux/auth/auth.service';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { loginThunk } from 'redux/auth/auth-thunk';
+import { loginThunk, signUpThunk } from 'redux/auth/auth-thunk';
 
 export default function SignUpFormComponent() {
   const dispatch = useDispatch();
@@ -26,9 +25,8 @@ export default function SignUpFormComponent() {
       email: userMail,
       password: userPassword,
     };
-    signUp(newUser)
+    dispatch(signUpThunk(newUser))
       .then(() => {
-        Notiflix.Notify.success('User created!');
         dispatch(
           loginThunk({
             email: userMail,
