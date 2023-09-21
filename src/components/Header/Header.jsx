@@ -13,7 +13,6 @@ import { selectIsLoggedIn, selectUser } from 'redux/auth/selectors';
 
 export default function Header() {
   const user = useSelector(selectUser);
-  console.log(user);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
   const handleLogin = () => {};
