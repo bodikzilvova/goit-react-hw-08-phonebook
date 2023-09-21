@@ -17,8 +17,8 @@ export const signUpThunk = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await axios.post('/users/signup', credentials);
-      setToken();
-      Notiflix.Notify.success('Welcome to phonebook!');
+      setToken(data.token);
+      Notiflix.Notify.success(`You are registred as ${data.user.name}`);
       return data;
     } catch (e) {
       Notiflix.Notify.failure(`${e.message}`);
@@ -32,7 +32,7 @@ export const loginThunk = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await axios.post('/users/login', credentials);
-      setToken();
+      setToken(data.token);
       Notiflix.Notify.success('Welcome to phonebook!');
       return data;
     } catch (e) {
@@ -47,7 +47,7 @@ export const logOutThunk = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const { data } = await axios.post('/users/logout');
-      delToken();
+      delToken(data.token);
       return data;
     } catch (e) {
       Notiflix.Notify.failure(`${e.message}`);

@@ -7,7 +7,6 @@ import {
   Noreg,
   Btn,
 } from './LoginFormComponent.styled';
-
 import { loginThunk } from 'redux/auth/auth-thunk';
 import { useDispatch } from 'react-redux';
 
