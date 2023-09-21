@@ -13,11 +13,10 @@ import { selectIsLoggedIn, selectUser } from 'redux/auth/selectors';
 
 export default function Header() {
   const user = useSelector(selectUser);
-  console.log(user)
+  console.log(user);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
-  const handleLogin = () => {
-  };
+  const handleLogin = () => {};
 
   const handleLogOut = () => {
     dispatch(logOutThunk());
@@ -39,7 +38,6 @@ export default function Header() {
           </Typography>
 
           {isLoggedIn && <UserName>{user.name}</UserName>}
-         
 
           <Link to="/" style={{ color: 'white' }}>
             <Button color="inherit">Home</Button>

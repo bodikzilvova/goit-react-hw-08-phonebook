@@ -26,7 +26,7 @@ export default function LoginFormComponent() {
       .then(() => {
         navigate('/phonebook');
       })
-      .catch(() =>{});
+      .catch(() => {});
   };
 
   return (

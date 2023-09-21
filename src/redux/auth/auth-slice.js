@@ -1,4 +1,9 @@
-import { getProfileThunk, logOutThunk, loginThunk, signUpThunk } from './auth-thunk';
+import {
+  getProfileThunk,
+  logOutThunk,
+  loginThunk,
+  signUpThunk,
+} from './auth-thunk';
 const { createSlice, isAnyOf } = require('@reduxjs/toolkit');
 
 const initialState = {
@@ -21,13 +26,13 @@ const handleFulfilled = (state, { payload }) => {
   state.isLoggedIn = true;
 };
 
-const handleFulfilledRegistretion = (state, {payload}) => {
+const handleFulfilledRegistretion = (state, { payload }) => {
   state.isLoading = false;
   state.error = '';
   state.token = payload.token;
   state.user = payload.user;
   state.isLoggedIn = true;
-}
+};
 
 const handleFulfilledProfile = (state, { payload }) => {
   state.isLoading = false;
@@ -48,7 +53,6 @@ const handleRejected = (state, { payload }) => {
   state.error = payload;
 };
 
-
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -64,7 +68,7 @@ const authSlice = createSlice({
           loginThunk.pending,
           getProfileThunk.pending,
           logOutThunk.pending,
-          signUpThunk.pending,
+          signUpThunk.pending
         ),
         handlePending
       )
@@ -73,7 +77,7 @@ const authSlice = createSlice({
           loginThunk.rejected,
           getProfileThunk.rejected,
           logOutThunk.rejected,
-          signUpThunk.rejected,
+          signUpThunk.rejected
         ),
         handleRejected
       );
