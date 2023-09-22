@@ -55,9 +55,10 @@ export default function Header() {
               {isLoggedIn ? 'LogOut' : 'Login'}
             </Button>
           </Link>
+          {isLoggedIn && (
           <Link to="/phonebook" style={{ color: 'white' }}>
-            <Button color="inherit">Phonebook</Button>
-          </Link>
+            <Button color="inherit">Contacts</Button>
+          </Link>)}
         </Toolbar>
       </AppBar>
     </Box>
