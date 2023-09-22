@@ -9,17 +9,17 @@ import PublicRoutes from './PublicRoutes/PublicRoutes';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getProfileThunk } from 'redux/auth/auth-thunk';
-import { selectIsLoading } from 'redux/auth/selectors';
+import { selectIsRefreshing } from 'redux/auth/selectors';
 
 export const App = () => {
-  const isLoading = useSelector(selectIsLoading);
-
+  const isRefreshing = useSelector(selectIsRefreshing);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getProfileThunk());
   }, [dispatch]);
 
-  return isLoading ? (<p> Please wait... </p>) :
+  return isRefreshing ? (<p> Please wait... </p>) :
     ( <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Homepage />} />
