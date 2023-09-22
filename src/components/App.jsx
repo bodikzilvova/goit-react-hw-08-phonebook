@@ -6,18 +6,21 @@ import { PhonebookPage } from 'pages/PhonebookPage/PhonebookPage';
 import Layout from './Layout/Layout';
 import PrivateRoutes from './PrivateRoutes/PrivateRoutes';
 import PublicRoutes from './PublicRoutes/PublicRoutes';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getProfileThunk } from 'redux/auth/auth-thunk';
+import { selectIsRefreshing } from 'redux/auth/selectors';
 
 export const App = () => {
+  const isRefreshing = useSelector(selectIsRefreshing);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProfileThunk());
   }, [dispatch]);
 
-  return (
-    <Routes>
+  return isRefreshing ? (<p> Please wait... </p>) :
+    ( <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Homepage />} />
         <Route
