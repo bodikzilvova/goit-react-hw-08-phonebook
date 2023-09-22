@@ -14,37 +14,37 @@ import { selectIsRefreshing } from 'redux/auth/selectors';
 export const App = () => {
   const isRefreshing = useSelector(selectIsRefreshing);
   const dispatch = useDispatch();
+  console.log(isRefreshing)
 
   useEffect(() => {
     dispatch(getProfileThunk());
   }, [dispatch]);
 
-  return isRefreshing ? (<p> Please wait... </p>) :
-    ( <Routes>
+  return isRefreshing ? (
+    <p> Please wait... </p>
+  ) : (
+    <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Homepage />} />
         <Route
           path="registretion"
           element={
-            <PublicRoutes>
-              <RegistreationPage />
-            </PublicRoutes>
+            <PublicRoutes
+              redirectTo="/phonebook"
+              component={<RegistreationPage />}
+            />
           }
         />
         <Route
           path="login"
           element={
-            <PublicRoutes>
-              <LoginPage />
-            </PublicRoutes>
+            <PublicRoutes redirectTo="/phonebook" component={<LoginPage />} />
           }
         />
         <Route
           path="phonebook"
           element={
-            <PrivateRoutes>
-              <PhonebookPage />
-            </PrivateRoutes>
+            <PrivateRoutes redirectTo="/login" component={<PhonebookPage />} />
           }
         ></Route>
       </Route>
