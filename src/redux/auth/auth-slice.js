@@ -17,7 +17,6 @@ const initialState = {
 
 const handlePending = state => {
   state.isLoading = true;
-  state.isRefreshing = true;
 };
 
 const handleFulfilled = (state, { payload }) => {
@@ -26,7 +25,7 @@ const handleFulfilled = (state, { payload }) => {
   state.token = payload.token;
   state.user = payload.user;
   state.isLoggedIn = true;
-  state.isRefreshing = false;
+  // state.isRefreshing = false;
 };
 
 const handleFulfilledRegistretion = (state, { payload }) => {
@@ -35,7 +34,7 @@ const handleFulfilledRegistretion = (state, { payload }) => {
   state.token = payload.token;
   state.user = payload.user;
   state.isLoggedIn = true;
-  state.isRefreshing = false;
+  // state.isRefreshing = false;
 };
 
 const handleFulfilledProfile = (state, { payload }) => {
@@ -43,7 +42,7 @@ const handleFulfilledProfile = (state, { payload }) => {
   state.error = '';
   state.user = payload;
   state.isLoggedIn = true;
-  state.isRefreshing = false;
+  // state.isRefreshing = false;
 };
 const handleFulfilledLogOut = (state, { payload }) => {
   state.isLoading = false;
@@ -51,13 +50,13 @@ const handleFulfilledLogOut = (state, { payload }) => {
   state.user = { name: null, email: null };
   state.token = '';
   state.isLoggedIn = false;
-  state.isRefreshing = false;
+  // state.isRefreshing = false;
 };
 
 const handleRejected = (state, { payload }) => {
   state.isLoading = false;
   state.error = payload;
-  state.isRefreshing = false;
+  // state.isRefreshing = false;
 };
 
 const authSlice = createSlice({
